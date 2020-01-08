@@ -1,15 +1,16 @@
 package com.example.myapplication
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.ReceiveChannel
 import kotlinx.coroutines.channels.produce
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
-import java.lang.IllegalArgumentException
 
 class MainActivity : AppCompatActivity() {
 
@@ -41,30 +42,39 @@ class MainActivity : AppCompatActivity() {
 
     fun getList(): List<String> {
         val list = ArrayList<String>()
-        Log.d("LIST", "ADD A")
+        Log.d("LIST", "BEFORE ADD A")
         list.add("A")
-        Log.d("LIST", "ADD B")
+        Log.d("LIST", "AFTER ADD A")
+        Log.d("LIST", "BEFORE ADD B")
         list.add("B")
-        Log.d("LIST", "ADD C")
+        Log.d("LIST", "AFTER ADD B")
+        Log.d("LIST", "BEFORE ADD C")
         list.add("C")
+        Log.d("LIST", "AFTER ADD C")
         return list
     }
 
     fun CoroutineScope.getChannelList(): ReceiveChannel<String> = produce {
-        Log.d("CHANNEL", "SEND A")
+        Log.d("CHANNEL", "BEFORE SEND A")
         send("A")
-        Log.d("CHANNEL", "SEND B")
+        Log.d("CHANNEL", "AFTER SEND A")
+        Log.d("CHANNEL", "BEFORE SEND B")
         send("B")
-        Log.d("CHANNEL", "SEND C")
+        Log.d("CHANNEL", "AFTER SEND B")
+        Log.d("CHANNEL", "BEFORE SEND C")
         send("C")
+        Log.d("CHANNEL", "AFTER SEND C")
     }
 
     fun getFlowList(): Flow<String> = flow {
-        Log.d("FLOW", "EMIT A")
+        Log.d("FLOW", "BEFORE EMIT A")
         emit("A")
-        Log.d("FLOW", "EMIT B")
+        Log.d("FLOW", "AFTER EMIT A")
+        Log.d("FLOW", "BEFORE EMIT B")
         emit("B")
-        Log.d("FLOW", "EMIT C")
+        Log.d("FLOW", "AFTER EMIT B")
+        Log.d("FLOW", "BEFORE EMIT C")
         emit("C")
+        Log.d("FLOW", "AFTER EMIT C")
     }
 }
